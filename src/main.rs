@@ -11,7 +11,7 @@ use anyhow::Result;
 use clap::Parser;
 
 #[derive(Parser)]
-#[command(name = "rx", about = "TUI-native code review tool for AI agent workflows")]
+#[command(name = "rev", about = "TUI-native code review tool for AI agent workflows")]
 struct Cli {
     #[command(subcommand)]
     command: Option<Command>,

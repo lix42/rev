@@ -1,5 +1,5 @@
 [package]
-name = "rx"
+name = "rev"
 version = "0.1.0"
 edition = "2021"
 description = "TUI-native code review tool for AI agent workflows"

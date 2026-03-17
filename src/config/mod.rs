@@ -1,1 +1,1 @@
-//! Loads and validates config.toml from ~/.config/rx/config.toml.
+//! Loads and validates config.toml from ~/.config/rev/config.toml.

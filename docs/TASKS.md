@@ -1,6 +1,6 @@
-# rx — Project Tasks
+# rev — Project Tasks
 
-Task tracking for the rx project. See [design-spec.md](design-spec.md) for full context.
+Task tracking for the rev project. See [design-spec.md](design-spec.md) for full context.
 
 Each task has a detailed file in [tasks/](tasks/). Stories follow the phased build plan from the design spec.
 

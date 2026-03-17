@@ -2,7 +2,7 @@
 
 ## Goal
 
-Implement the `rx export` command that outputs comments in multiple formats. The text format (`filename#line: comment`) is the MVP — designed for pasting into AI agents. Markdown and JSON formats follow.
+Implement the `rev export` command that outputs comments in multiple formats. The text format (`filename#line: comment`) is the MVP — designed for pasting into AI agents. Markdown and JSON formats follow.
 
 ## Approach
 
@@ -13,7 +13,7 @@ Implement the `rx export` command that outputs comments in multiple formats. The
 - Text format: `file#line: body` for inline, `file: Global — body` for global. Output to stdout.
 - Markdown format: grouped by file with status indicators.
 - JSON format: structured output for MCP / programmatic use.
-- `rx export | pbcopy` should Just Work.
+- `rev export | pbcopy` should Just Work.
 
 ## Design
 
@@ -27,11 +27,11 @@ pub fn export_json(session: &ReviewSession, status_filter: &StatusFilter, file_f
 
 ## How to Verify
 
-1. `rx export` outputs only open comments in `file#line: body` format.
-2. `rx export --format markdown` outputs markdown grouped by file.
-3. `rx export --format json` outputs valid, parseable JSON.
-4. `rx export --status all` includes resolved comments.
-5. `rx export --file src/main.rs` filters to one file.
+1. `rev export` outputs only open comments in `file#line: body` format.
+2. `rev export --format markdown` outputs markdown grouped by file.
+3. `rev export --format json` outputs valid, parseable JSON.
+4. `rev export --status all` includes resolved comments.
+5. `rev export --file src/main.rs` filters to one file.
 6. With no comments, output is empty (no error).
 7. Unit tests for each format with known comment data.
 

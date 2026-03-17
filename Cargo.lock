@@ -697,9 +697,9 @@ dependencies = [
 
 [[package]]
 name = "instability"
-version = "0.3.11"
+version = "0.3.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "357b7205c6cd18dd2c86ed312d1e70add149aea98e7ef72b9fdf0270e555c11d"
+checksum = "5eb2d60ef19920a3a9193c3e371f726ec1dafc045dac788d0fb3704272458971"
 dependencies = [
  "darling",
  "indoc",
@@ -1224,6 +1224,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
 
 [[package]]
+name = "rev"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "clap",
+ "crossterm",
+ "dirs",
+ "git2",
+ "notify",
+ "notify-debouncer-mini",
+ "ratatui",
+ "serde",
+ "serde_json",
+ "similar",
+ "syntect",
+ "thiserror",
+ "tokio",
+ "toml",
+ "uuid",
+]
+
+[[package]]
 name = "rustix"
 version = "0.38.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1254,29 +1277,6 @@ name = "rustversion"
 version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
-
-[[package]]
-name = "rx"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "chrono",
- "clap",
- "crossterm",
- "dirs",
- "git2",
- "notify",
- "notify-debouncer-mini",
- "ratatui",
- "serde",
- "serde_json",
- "similar",
- "syntect",
- "thiserror",
- "tokio",
- "toml",
- "uuid",
-]
 
 [[package]]
 name = "ryu"

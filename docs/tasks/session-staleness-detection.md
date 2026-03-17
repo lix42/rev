@@ -13,7 +13,7 @@ Detect when sessions are stale (inactive + all resolved) or merged (branch lande
 
 ## How to Verify
 
-1. After merging a branch into main, launching `rx` detects the session as merged and shows the archive prompt.
+1. After merging a branch into main, launching `rev` detects the session as merged and shows the archive prompt.
 2. A 30+ day old session with all comments resolved shows the staleness prompt.
 3. User can choose to archive or keep open.
 4. Neither detection auto-closes without user confirmation.

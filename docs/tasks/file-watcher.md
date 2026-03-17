@@ -29,7 +29,7 @@ The main event loop integrates this channel alongside crossterm events.
 
 ## How to Verify
 
-1. Launch `rx`, edit a watched file externally — diff view updates automatically.
+1. Launch `rev`, edit a watched file externally — diff view updates automatically.
 2. Rapid saves (e.g., agent writing multiple files) are batched into a single update.
 3. Scroll position is preserved after reload.
 4. Status bar shows "Reloaded" briefly.

@@ -2,12 +2,12 @@
 
 ## Goal
 
-Load user configuration from `~/.config/rx/config.toml`, providing sensible defaults when the file doesn't exist or fields are missing.
+Load user configuration from `~/.config/rev/config.toml`, providing sensible defaults when the file doesn't exist or fields are missing.
 
 ## Approach
 
 - Define a `Config` struct matching design spec section 12.2.
-- Use `dirs` crate for `~/.config/rx/` path.
+- Use `dirs` crate for `~/.config/rev/` path.
 - Use `toml` crate to parse.
 - All fields optional with defaults (the tool should work with zero configuration).
 - Validate values (e.g., `tab_width` must be > 0, `reload_debounce_ms` must be reasonable).

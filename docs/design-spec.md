@@ -1,13 +1,13 @@
-# rx — TUI Diff/Review Tool Design Specification
+# rev — TUI Diff/Review Tool Design Specification
 
 ## 1. Overview
 
-`rx` (review experience) is a TUI-native code review tool designed for AI agent coding workflows. It renders diffs with syntax highlighting and provides a structured annotation layer — inline and global comments — that can be exported in a format AI agents understand and act on. The long-term vision is a local PR review loop between human and agent, without leaving the terminal.
+`rev` is a TUI-native code review tool designed for AI agent coding workflows. It renders diffs with syntax highlighting and provides a structured annotation layer — inline and global comments — that can be exported in a format AI agents understand and act on. The long-term vision is a local PR review loop between human and agent, without leaving the terminal.
 
 ### 1.1 Core Value Proposition
 
 - **Fast**: single Rust binary, instant startup, no runtime dependencies
-- **Easy to install**: `brew install rx`
+- **Easy to install**: `brew install rev`
 - **Easy to use**: launch from the shell, keyboard-driven throughout
 - **Review-first**: the core workflow is reading diffs and writing structured comments, not merging
 - **Agent-aware**: export comments in `filename#line: comment` format that AI coding agents can parse and act on
@@ -24,7 +24,7 @@ AI coding agents (Claude Code, Cursor, Codex) produce large, multi-file diffs. T
 | Open a PR on GitHub | Requires a remote, breaks local flow |
 | Manual copy-paste notes | Unstructured, easy to lose file/line context |
 
-`rx` is **GitHub PR review, but local, TUI-native, and agent-aware.**
+`rev` is **GitHub PR review, but local, TUI-native, and agent-aware.**
 
 ---
 
@@ -38,7 +38,7 @@ AI coding agents (Claude Code, Cursor, Codex) produce large, multi-file diffs. T
 | Syntax highlighting | `syntect` crate | Same engine as VS Code's TextMate grammars; works offline, no subprocess |
 | File watching | `notify` crate | Cross-platform, async-friendly, inotify/FSEvents/kqueue under the hood |
 | Async runtime | `tokio` | For file watcher events, MCP server, and future extensibility |
-| Config | `toml` + `dirs` crate | `~/.config/rx/config.toml`, feels native |
+| Config | `toml` + `dirs` crate | `~/.config/rev/config.toml`, feels native |
 | Distribution | Homebrew tap | Single binary makes `brew install` straightforward |
 
 ---
@@ -233,7 +233,7 @@ struct Anchor {
 Sessions are stored as local JSON files:
 
 ```
-~/.local/share/rx/sessions/<session_hash>.json
+~/.local/share/rev/sessions/<session_hash>.json
 ```
 
 The session hash is derived from `sha256(canonical_repo_root + base_ref + branch_name)`.
@@ -262,7 +262,7 @@ Whole repo, specific paths, or a specific file.
 
 ### 5.3 Mode Selector UI
 
-On launch inside a git repo, `rx` detects the repo and presents a mode selector instead of requiring CLI flags:
+On launch inside a git repo, `rev` detects the repo and presents a mode selector instead of requiring CLI flags:
 
 ```
 ┌─ Open Review Session ─────────────────────────────────┐
@@ -284,13 +284,13 @@ This collapses CLI complexity into a single guided moment and makes it easy to r
 
 ### 5.4 Behavior Outside a Git Repo
 
-If `rx` is launched in a directory that is not inside a git repository, it should display a clear, friendly error:
+If `rev` is launched in a directory that is not inside a git repository, it should display a clear, friendly error:
 
 ```
-rx: not a git repository (or any parent up to mount point /)
+rev: not a git repository (or any parent up to mount point /)
 
-rx currently requires a git repo to work. Run it from inside a project
-that uses git, or see https://github.com/<user>/rx for future plans.
+rev currently requires a git repo to work. Run it from inside a project
+that uses git, or see https://github.com/<user>/rev for future plans.
 ```
 
 Non-git diff sources (two-file comparison, directory diff) are a non-goal for v1 but may be added later. The error message should not be hostile — this is likely the user's first interaction with the tool.
@@ -382,22 +382,22 @@ README.md: Global — update the setup section to reflect the new env var
 
 **CLI usage:**
 ```bash
-rx export                          # stdout, all open comments (default)
-rx export --format markdown
-rx export --format json
+rev export                          # stdout, all open comments (default)
+rev export --format markdown
+rev export --format json
 ```
 
 **Filtering options:**
 ```bash
-rx export --status open            # only open comments (default)
-rx export --status all             # open + resolved + updated
-rx export --status resolved        # only resolved
-rx export --file src/auth/login.rs # only comments for a specific file
+rev export --status open            # only open comments (default)
+rev export --status all             # open + resolved + updated
+rev export --status resolved        # only resolved
+rev export --file src/auth/login.rs # only comments for a specific file
 ```
 
 The default behavior is to export only **open** comments — this is what you want when pasting feedback into an AI agent. Resolved comments are noise in that context. The `--status all` flag is available for audit/documentation purposes.
 
-The default stdout format is the killer feature — `rx export | pbcopy` and paste into the AI agent.
+The default stdout format is the killer feature — `rev export | pbcopy` and paste into the AI agent.
 
 ---
 
@@ -482,7 +482,7 @@ Key: `canonical_repo_root + base_commit_sha + branch_name`
 The repo root path is **canonicalized** (symlinks resolved, `.` and `..` collapsed) before hashing to prevent duplicate sessions when the same repo is accessed via different paths (e.g., `~/projects/myapp` vs. `/home/user/projects/myapp` vs. a symlink).
 
 ```
-~/.local/share/rx/sessions/
+~/.local/share/rev/sessions/
   <sha256 of canonical_repo_path + base>_<branch>.json
 ```
 
@@ -506,7 +506,7 @@ A session is created automatically on first use within a given context.
 Sessions can close through four mechanisms, in priority order:
 
 ```
-1. EXPLICIT  — user runs `rx close` or presses [X] in session list
+1. EXPLICIT  — user runs `rev close` or presses [X] in session list
                → most reliable, always supported
 
 2. MERGED    — detectable via:
@@ -654,7 +654,7 @@ TUI auto-reloads, shows agent replies in comment thread
 Human reviews, resolves, or adds new comments
 ```
 
-This is where `rx` goes from a good review tool to a **platform** — a local async review loop between human and agent.
+This is where `rev` goes from a good review tool to a **platform** — a local async review loop between human and agent.
 
 ---
 
@@ -663,7 +663,7 @@ This is where `rx` goes from a good review tool to a **platform** — a local as
 ### 12.1 Config File Location
 
 ```
-~/.config/rx/config.toml
+~/.config/rev/config.toml
 ```
 
 ### 12.2 Configurable Options
@@ -708,7 +708,7 @@ default_status = "open"        # open | resolved | updated | all
 
 ### 13.1 Color Degradation
 
-`rx` should detect terminal color capabilities and degrade gracefully:
+`rev` should detect terminal color capabilities and degrade gracefully:
 
 | Terminal capability | Behavior |
 |---------------------|----------|
@@ -729,14 +729,14 @@ Default theme should avoid red/green as the only differentiator for added/remove
 ### 14.1 Homebrew
 
 ```
-brew tap <user>/rx
-brew install rx
+brew tap <user>/rev
+brew install rev
 ```
 
 ### 14.2 Cargo
 
 ```
-cargo install rx
+cargo install rev
 ```
 
 ### 14.3 Pre-built Binaries

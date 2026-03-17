@@ -28,9 +28,9 @@ pub fn open_repo(path: &Path) -> Result<RepoInfo>;
 
 ## How to Verify
 
-1. Run `cargo test` — unit test that `open_repo` returns correct info for the test repo itself (the `rx` project).
-2. Run `rx` inside the `rx` repo — should not error.
-3. Run `rx` in `/tmp` (no git repo) — should print the friendly error and exit cleanly.
+1. Run `cargo test` — unit test that `open_repo` returns correct info for the test repo itself (the `rev` project).
+2. Run `rev` inside the `rev` repo — should not error.
+3. Run `rev` in `/tmp` (no git repo) — should print the friendly error and exit cleanly.
 
 ## Dependencies
 

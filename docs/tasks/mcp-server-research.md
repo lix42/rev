@@ -2,7 +2,7 @@
 
 ## Goal
 
-Research MCP protocol requirements and design the `rx` MCP server architecture before implementation.
+Research MCP protocol requirements and design the `rev` MCP server architecture before implementation.
 
 ## Scope
 

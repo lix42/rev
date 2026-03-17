@@ -28,7 +28,7 @@ No `unsafe` unless absolutely necessary and justified in a comment.
 
 ## Project Overview
 
-`rx` (review experience) is a TUI-native code review tool for AI agent coding workflows. It renders diffs with syntax highlighting and provides a structured annotation layer (inline and global comments) that can be exported in a format AI agents understand.
+`rev` is a TUI-native code review tool for AI agent coding workflows. It renders diffs with syntax highlighting and provides a structured annotation layer (inline and global comments) that can be exported in a format AI agents understand.
 
 See `docs/design-spec.md` for the full design specification.
 
@@ -45,7 +45,7 @@ src/
 ├── input/            # Keyboard handling, keymaps, vi-style modal system
 ├── git/              # Git integration (git2 crate)
 ├── mcp/              # MCP server (Phase 5)
-└── config/           # Config loading (~/.config/rx/config.toml)
+└── config/           # Config loading (~/.config/rev/config.toml)
 ```
 
 ## Tech Stack
@@ -94,6 +94,6 @@ cargo fmt
 ## Gotchas
 
 - **System C deps required**: `git2` needs `libgit2`/`cmake`, `syntect` needs `oniguruma`. Install via `brew install cmake pkg-config libgit2 oniguruma` on macOS.
-- **Session storage**: Review sessions persist as JSON at `~/.local/share/rx/sessions/`.
-- **Config location**: User config lives at `~/.config/rx/config.toml`.
+- **Session storage**: Review sessions persist as JSON at `~/.local/share/rev/sessions/`.
+- **Config location**: User config lives at `~/.config/rev/config.toml`.
 - **syntect grammars**: Bundled at compile time — adding language support means rebuilding.

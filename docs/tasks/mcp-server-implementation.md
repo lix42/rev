@@ -16,7 +16,7 @@ Implement the MCP server that exposes review session tools so AI agents can inte
 
 ## How to Verify
 
-1. Start the MCP server alongside or as part of `rx`.
+1. Start the MCP server alongside or as part of `rev`.
 2. An MCP client can call `list_comments` and get valid results.
 3. `reply_to_comment` adds a reply that appears in the TUI.
 4. `resolve_comment` changes comment status, visible in TUI.

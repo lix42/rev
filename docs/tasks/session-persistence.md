@@ -2,15 +2,15 @@
 
 ## Goal
 
-Persist review sessions as JSON files so comments survive across `rx` launches.
+Persist review sessions as JSON files so comments survive across `rev` launches.
 
 ## Approach
 
-- Store sessions at `~/.local/share/rx/sessions/<session_hash>.json`.
+- Store sessions at `~/.local/share/rev/sessions/<session_hash>.json`.
 - Session hash = `sha256(canonical_repo_root + base_sha + branch_name)` (design spec 9.1; note: section 4.6 says `base_ref` but 9.1 clarifies refs are resolved to concrete SHAs — use `base_sha`).
 - On launch, check if a session exists for the current context and load it.
 - Auto-save after every comment change (debounced to avoid excessive writes).
-- Use `dirs` crate for `~/.local/share/rx/` path.
+- Use `dirs` crate for `~/.local/share/rev/` path.
 - Create the directory structure if it doesn't exist.
 
 ## Design
@@ -23,7 +23,7 @@ pub fn save_session(session: &ReviewSession) -> Result<()>;
 
 ## How to Verify
 
-1. Start `rx`, add a comment, quit. Restart `rx` — the comment is still there.
+1. Start `rev`, add a comment, quit. Restart `rev` — the comment is still there.
 2. Session file exists at the expected path with valid JSON.
 3. Session file can be manually inspected and is human-readable.
 4. Different branches create different session files.

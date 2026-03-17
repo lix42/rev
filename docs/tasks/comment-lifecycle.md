@@ -21,8 +21,8 @@ Implement the full comment status lifecycle: Open → Resolved, and Open → Upd
 1. New comment starts as Open (`●`).
 2. Press `r` → becomes Resolved (`○`).
 3. Edit a resolved comment → becomes Updated (`◐`).
-5. `rx export --status open` excludes resolved comments.
-6. `rx export --status all` includes all.
+5. `rev export --status open` excludes resolved comments.
+6. `rev export --status all` includes all.
 
 ## Dependencies
 

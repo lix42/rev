@@ -15,7 +15,7 @@ Implement the file panel (left sidebar) that lists all files with diffs, shows p
 
 ## How to Verify
 
-1. Launch `rx` in a repo with changes — file panel lists all changed files.
+1. Launch `rev` in a repo with changes — file panel lists all changed files.
 2. Each file shows `+N -M` stats.
 3. `j`/`k` moves selection up/down with visual highlight.
 4. `Enter` on a file updates the center panel (even if it just prints the file name for now).

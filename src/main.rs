@@ -11,7 +11,10 @@ use anyhow::Result;
 use clap::Parser;
 
 #[derive(Parser)]
-#[command(name = "rev", about = "TUI-native code review tool for AI agent workflows")]
+#[command(
+    name = "rev",
+    about = "TUI-native code review tool for AI agent workflows"
+)]
 struct Cli {
     #[command(subcommand)]
     command: Option<Command>,
@@ -40,14 +43,12 @@ async fn main() -> Result<()> {
     let cli = Cli::parse();
 
     match cli.command {
-        Some(Command::Export { format, status, file }) => {
-            review::export::run(&format, &status, file.as_deref())
-        }
-        Some(Command::Close) => {
-            review::session::close()
-        }
-        None => {
-            app::run().await
-        }
+        Some(Command::Export {
+            format,
+            status,
+            file,
+        }) => review::export::run(&format, &status, file.as_deref()),
+        Some(Command::Close) => review::session::close(),
+        None => app::run().await,
     }
 }

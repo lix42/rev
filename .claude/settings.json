@@ -8,5 +8,32 @@
       "Bash(cargo fmt:*)",
       "Bash(cargo build:*)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo fmt --quiet 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the file path contains 'target/', 'Cargo.lock', or '.local/share/rev/sessions', respond with BLOCK and the reason. Otherwise respond with ALLOW."
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
   }
 }

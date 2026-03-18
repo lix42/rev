@@ -6,7 +6,43 @@
       "Bash(cargo test:*)",
       "Bash(cargo clippy:*)",
       "Bash(cargo fmt:*)",
-      "Bash(cargo build:*)"
+      "Bash(cargo build:*)",
+      "Bash(cargo generate-lockfile:*)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "mcp__plugin_context7_context7__resolve-library-id",
+      "mcp__plugin_context7_context7__query-docs"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cargo fmt --quiet 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "If the file path contains 'target/', 'Cargo.lock', or '.local/share/rev/sessions', respond with BLOCK and the reason. Otherwise respond with ALLOW."
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
   }
 }

@@ -91,6 +91,12 @@ cargo clippy -- -D warnings
 cargo fmt
 ```
 
+## CI & Hooks
+
+- **Pre-commit hook:** `.githooks/pre-commit` runs `cargo fmt --check`, `cargo clippy -- -D warnings`, and `cargo test` before each commit.
+- **GitHub Actions:** `.github/workflows/ci.yml` runs the same checks on push/PR to `main`.
+- **Activate hooks locally:** `git config core.hooksPath .githooks`
+
 ## Gotchas
 
 - **System C deps required**: `git2` needs `libgit2`/`cmake`, `syntect` needs `oniguruma`. Install via `brew install cmake pkg-config libgit2 oniguruma` on macOS.

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -19,7 +21,7 @@ pub enum CommentKind {
     Inline {
         file: PathBuf,
         line: usize,
-        anchor: Anchor,
+        anchor: Box<Anchor>,
     },
     Global,
 }

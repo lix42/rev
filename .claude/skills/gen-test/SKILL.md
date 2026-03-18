@@ -20,7 +20,7 @@ Generate a `#[cfg(test)] mod tests` block for the specified Rust source file.
    - `use super::*;`
    - One `#[test]` function per public function/method covering the happy path.
    - Additional tests for edge cases (empty input, error paths) where obvious.
-4. Use `assert_eq!`, `assert!`, or `assert_matches!` as appropriate.
+4. Use `assert_eq!`, `assert!`, or `matches!()` as appropriate. Do not use `assert_matches!` (unstable).
 5. Use descriptive test names in snake_case: `test_<function_name>_<scenario>`.
 6. If the file already has a `mod tests` block, add new tests to it rather than creating a duplicate.
 7. Run `cargo test` to verify the new tests compile and pass.

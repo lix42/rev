@@ -107,7 +107,7 @@ cargo fmt
 - **Session storage**: Review sessions persist as JSON at `~/.local/share/rev/sessions/`.
 - **Config location**: User config lives at `~/.config/rev/config.toml`.
 - **syntect grammars**: Bundled at compile time — adding language support means rebuilding.
-- **Pre-existing dead code warnings**: Several modules have `dead_code` warnings (review/comment.rs, review/session.rs) because types are defined but not yet consumed. Expected during incremental development — don't suppress with `#[allow(dead_code)]` unless the module is complete.
+- **Dead code and clippy**: CI runs `clippy -- -D warnings`, which treats dead code as errors. During early development, new types/methods may not have consumers yet. Use `#[allow(dead_code)]` with a comment explaining when it can be removed (e.g., "used once downstream consumers exist"). Remove the allow as soon as the code is wired up.
 
 ## Testing patterns
 - Use `tempfile::tempdir()` for isolated test repos — never use hardcoded paths under `/tmp`.

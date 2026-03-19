@@ -43,21 +43,20 @@ Invoke `/commit-commands:commit-push-pr` to create commits, push to remote, and 
 
 - Make sure all changes (including review fixes, CLAUDE.md updates, and task status updates from previous steps) are included.
 
-## Step 6: Monitor the PR
+## Step 6: Wait for CI checks
 
-After the PR is created, actively monitor it:
-
-### CI checks (lint/test/build)
 - Run `gh pr checks <pr-number> --watch` to monitor CI status.
-- If any checks fail: read the failure logs with `gh run view <run-id> --log-failed`, diagnose the issue, fix it, commit, and push. Then resume monitoring.
+- If any checks fail: read the failure logs with `gh run view <run-id> --log-failed`, diagnose the issue, fix it, commit, and push. Then re-monitor until all checks pass.
+- Do not proceed to Step 7 until all CI checks are green.
 
-### Review comments
+## Step 7: Review PR comments
+
+After CI passes, check for review comments (bot and human reviewers will have had time to post by now):
+
 - Check for comments with `gh api repos/{owner}/{repo}/pulls/{pr-number}/reviews` and `gh api repos/{owner}/{repo}/pulls/{pr-number}/comments`.
 - For each comment, assess it:
   - **Not a concern** (style nit, misunderstanding, or disagreement): reply explaining why and resolve the comment.
   - **Straightforward fix** (typo, naming, small logic change): fix it, push the update, reply noting the fix, and resolve.
   - **Complex or debatable issue**: present the comment to the user with context and your analysis. Discuss before taking action.
-
-### When to stop monitoring
-- All CI checks pass AND no unresolved comments: tell the user the PR is ready for merge.
-- If the PR has been idle with no new activity after all checks pass, let the user know.
+- If fixes were pushed, go back to Step 6 to wait for CI again, then re-check comments.
+- When all CI checks pass and no unresolved comments remain: tell the user the PR is ready for merge.

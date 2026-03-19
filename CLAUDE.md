@@ -23,6 +23,10 @@ When adding or updating crates, use the latest stable version. Check crates.io i
 ### Error handling
 Use `anyhow::Result` for application-level errors. Use `thiserror` for library-style errors that cross module boundaries and need matching. Don't `unwrap()` in non-test code.
 
+### Task tracking
+- Tasks are tracked in `docs/TASKS.md`. When starting a task, mark it `[~]`. Before merging a feature, mark it `[x]`.
+- When starting work on a task from TASKS.md, mark it as in progress at the beginning of the session.
+
 ### Unsafe code
 No `unsafe` unless absolutely necessary and justified in a comment.
 
@@ -43,7 +47,7 @@ src/
 ├── watcher/          # File system watcher (notify crate, tokio task)
 ├── ui/               # Ratatui widgets (file panel, diff view, comment panel, etc.)
 ├── input/            # Keyboard handling, keymaps, vi-style modal system
-├── git/              # Git integration (git2 crate)
+├── git/              # Git integration (git2 crate): repo detection, branch/SHA extraction
 ├── mcp/              # MCP server (Phase 5)
 └── config/           # Config loading (~/.config/rev/config.toml)
 ```
@@ -103,3 +107,10 @@ cargo fmt
 - **Session storage**: Review sessions persist as JSON at `~/.local/share/rev/sessions/`.
 - **Config location**: User config lives at `~/.config/rev/config.toml`.
 - **syntect grammars**: Bundled at compile time — adding language support means rebuilding.
+- **Dead code and clippy**: CI runs `clippy -- -D warnings`, which treats dead code as errors. During early development, new types/methods may not have consumers yet. Use `#[allow(dead_code)]` with a comment explaining when it can be removed (e.g., "used once downstream consumers exist"). Remove the allow as soon as the code is wired up.
+
+## Testing patterns
+- Use `tempfile::tempdir()` for isolated test repos — never use hardcoded paths under `/tmp`.
+- `unwrap()` is fine in test code. Use `expect("msg")` for setup steps.
+- Test git operations by creating real repos with `git2::Repository::init()`, not mocks.
+- Bind `repo.index()` to a variable before calling `.write_tree()` — don't chain and drop.

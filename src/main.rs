@@ -42,6 +42,20 @@ enum Command {
 async fn main() -> Result<()> {
     let cli = Cli::parse();
 
+    // TODO: pass _repo_info to subcommands once they consume it
+    let _repo_info = match git::open_repo(&std::env::current_dir()?) {
+        Ok(info) => info,
+        Err(e) => {
+            eprintln!(
+                "rev: {e:#}\n\n\
+                 rev currently requires a git repo with at least one commit.\n\
+                 Run it from inside a project that uses git."
+            );
+            // No resources to clean up at this point; exit before the TUI starts.
+            std::process::exit(1);
+        }
+    };
+
     match cli.command {
         Some(Command::Export {
             format,

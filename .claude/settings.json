@@ -25,6 +25,16 @@
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Read docs/TASKS.md silently. If any task is marked [~] (in progress), note it as the active task and briefly tell the user which task is currently in-progress. If no task is [~], ask the user which task they're working on today and offer to mark it in-progress using the task-progress skill. Keep this brief — one or two sentences max."
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",

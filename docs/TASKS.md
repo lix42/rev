@@ -12,7 +12,7 @@ Each task has a detailed file in [tasks/](tasks/). Stories follow the phased bui
 
 > Goal: Side-by-side diff with syntax highlighting, file panel, hunk navigation. Useful as a standalone diff viewer.
 
-- [ ] [Git repo detection](tasks/git-repo-detection.md)
+- [x] [Git repo detection](tasks/git-repo-detection.md)
 - [ ] [Git diff computation](tasks/git-diff-computation.md)
 - [ ] [Config loading](tasks/config-loading.md)
 - [ ] [TUI app skeleton](tasks/tui-app-skeleton.md)

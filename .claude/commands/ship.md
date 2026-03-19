@@ -35,7 +35,7 @@ Invoke `/claude-md-management:revise-claude-md` to capture any learnings from th
 
 ## Step 4: Update task status
 
-If this feature corresponds to a task in `docs/TASKS.md`, mark it as done (`[x]`).
+Invoke `/task-done` to mark the current task as done in `docs/TASKS.md`.
 
 ## Step 5: Commit, push, and create PR
 

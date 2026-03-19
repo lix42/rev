@@ -5,12 +5,14 @@ use std::path::{Path, PathBuf};
 
 /// Metadata about the current git repository.
 #[derive(Debug, Clone)]
+#[allow(dead_code)] // Fields and accessors used once downstream consumers exist
 pub struct RepoInfo {
     repo_root: PathBuf,
     head_sha: String,
     branch: Option<String>,
 }
 
+#[allow(dead_code)] // Accessors used once downstream consumers exist
 impl RepoInfo {
     /// Canonicalized path to the repository working directory.
     pub fn repo_root(&self) -> &Path {

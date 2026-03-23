@@ -15,7 +15,7 @@ Each task has a detailed file in [tasks/](tasks/). Stories follow the phased bui
 - [x] [Git repo detection](tasks/git-repo-detection.md)
 - [ ] [Git diff computation](tasks/git-diff-computation.md)
 - [ ] [Config loading](tasks/config-loading.md)
-- [ ] [TUI app skeleton](tasks/tui-app-skeleton.md)
+- [x] [TUI app skeleton](tasks/tui-app-skeleton.md)
 - [ ] [Input system & modal keybindings](tasks/input-system.md)
 - [ ] [Three-panel layout](tasks/three-panel-layout.md)
 - [ ] [Status bar](tasks/status-bar.md)

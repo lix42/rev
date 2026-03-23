@@ -9,7 +9,10 @@ rust-version = "1.94"
 [dependencies]
 # TUI framework
 ratatui = "0.29"
-crossterm = "0.28"
+crossterm = { version = "0.28", features = ["event-stream"] }
+
+# Async stream utilities (for EventStream)
+futures = "0.3"
 
 # Diff engine
 similar = { version = "2", features = ["unicode"] }
